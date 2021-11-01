@@ -1,17 +1,18 @@
 import styled from "styled-components";
 
-const Content = ({ data }) => {
+const Content = ({ post }) => {
+  const { imageList, user_name } = post;
   return (
     <ContBox>
       <TopBox>
-        <UserName>{data.user.name}유저네임</UserName>
+        <UserName>{user_name}유저네임</UserName>
       </TopBox>
-      {data.imageList.map((src) => (
-        <Img src={src.image} />
+      {imageList.map((img) => (
+        <Img src={img} />
       ))}
       <IconBox></IconBox>
       <Like></Like>
-      <Cont>{data.content}콘텐츠</Cont>
+      <Cont>{}콘텐츠</Cont>
     </ContBox>
   );
 };

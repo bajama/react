@@ -41,7 +41,7 @@ const Navigation = () => {
           </NavContainer>
         </NavBox>
       )}
-      {showAddModal && <AddPost />}
+      {showAddModal && <AddPost onClose={() => setshowAddModal(false)} />}
       {showAddModal && <BackDrop onClick={() => setshowAddModal(false)} />}
     </>
   );

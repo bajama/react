@@ -1,26 +1,31 @@
 import styled from "styled-components";
 import Content from "../organisms/Content";
 import { postList, instance } from "../../api";
+import { getPostMain } from "../../api/post";
 import { shortsList } from "../../api/shortList";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const MainPage = () => {
+  const [postList, setPostList] = useState([]);
   useEffect(() => {
-    instance.get("/");
+    (async () => {
+      const result = await getPostMain();
+      setPostList(result.postList);
+    })();
   }, []);
   return (
     <MainBox>
       <UserBox>
-        {shortsList.map((data) => (
-          <UserBoxCont>
-            <Img src={data.user.profileImage} />
-            <UserName>{data.user.name}유저네임</UserName>
+        {postList.map((post, i) => (
+          <UserBoxCont key={i}>
+            <Img src={post.imageList} />
+            <UserName>{post.user_name}유저네임</UserName>
           </UserBoxCont>
         ))}
       </UserBox>
       <ContContainer>
-        {postList.map((data) => (
-          <Content data={data} />
+        {postList.map((post, i) => (
+          <Content post={post} key={i} />
         ))}
       </ContContainer>
       <RecomendContainer></RecomendContainer>

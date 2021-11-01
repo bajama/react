@@ -1,16 +1,24 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { uploadImage } from "../../../api/upload";
+import { addPost } from "../../../api/post.js";
 
-const AddPost = () => {
+const AddPost = ({ onClose }) => {
   const [imgList, setimgList] = useState([]);
   const [content, setContent] = useState("");
 
   const handleSubmit = async () => {
+    if (imgList.length === 0) return;
     const promiseList = imgList.map((image) => {
       return uploadImage(image.file);
     });
-    const result = await Promise.all(promiseList);
+    const urlList = await Promise.all(promiseList);
+    console.log(urlList);
+
+    const { success } = await addPost({ content, urlList });
+    if (success) {
+      onClose();
+    }
   };
 
   const handleFileChange = (e) => {

@@ -25,7 +25,7 @@ const Signup = () => {
     if (success) {
       localStorage.setItem("token", token);
       instance.defaults.headers.common["Authorization"] = token;
-      history.push("/");
+      history.push("/login");
     } else {
       alert(message);
     }
