@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
 import { login } from "../../api/user";
 import { useHistory } from "react-router-dom";
 import { instance } from "../../api";
+import UserContext from "../../context/user";
 
 const Login = () => {
-  let history = useHistory();
+  const { setIsLogin } = useContext(UserContext);
   const [loginData, setLoginData] = useState({ userName: "", password: "" });
 
   const handleChange = ({ target }) => {
@@ -18,7 +19,7 @@ const Login = () => {
     if (success) {
       localStorage.setItem("token", token);
       instance.defaults.headers.common["Authorization"] = token;
-      history.push("/");
+      setIsLogin(true);
     } else {
       alert("유저정보를 확인하세요");
     }

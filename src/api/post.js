@@ -13,3 +13,10 @@ export const getPostMain = async () => {
   const result = await instance({ method, url });
   return result.data;
 };
+
+export const getPost = async (params) => {
+  const method = "get";
+  const url = "/post";
+  const result = await instance({ method, url, params });
+  return result.data;
+};

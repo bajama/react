@@ -1,10 +1,14 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useLocation } from "react-router";
 import { AiFillHome, AiOutlineFolderAdd } from "react-icons/ai";
 import AddPost from "../organisms/modal/AddPost";
 import { BackDrop } from "../atoms";
+import { Link } from "react-router-dom";
+import UserContext from "../../context/user";
+
 const Navigation = () => {
+  const { isLogin } = useContext(UserContext);
   let { pathname } = useLocation();
   const [showAddModal, setshowAddModal] = useState();
   const [isShow, setIsShow] = useState(true);
@@ -38,6 +42,11 @@ const Navigation = () => {
               <Like />
               <MyPage />
             </Icons>
+            {/* {
+            ?<Link to="/">login</Link>
+            <Link to="/signup">signup</Link>:
+            <Link to="/Logout">logout</Link>
+            } */}
           </NavContainer>
         </NavBox>
       )}
